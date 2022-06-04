@@ -6,14 +6,16 @@
 #include <fstream>
 #include "strings.h"
 
+void decrement(std::vector<std::string> &list);
+
 
 int main(int argc, const char *argv[])
 {
-    std::ifstream inFile("src/resources/input_test.txt");
+    std::ifstream inFile("src/resources/input.txt");
     std::ofstream outFile("src/resources/output.txt");
     std::string line;
     std::vector<std::string> fish = {};
-    int days = 2;
+    int days = 80;
 
     if (!inFile || !outFile)
     {
@@ -30,6 +32,7 @@ int main(int argc, const char *argv[])
 
     for (int i = 1; i <= days; i++)
     {
+        decrement(fish);
         if (i == 1)
         {
             outFile << "After " << i << " day:   ";
@@ -44,9 +47,27 @@ int main(int argc, const char *argv[])
         outFile << "\n";
     }
 
+    std::cout << "Total Fish: " << fish.size() << ", after " << days << " days";
+
     inFile.close();
     outFile.close();
 
 
     return 0;
+}
+
+void decrement(std::vector<std::string> &list)
+{
+    int currentSize = list.size();
+
+    for (int i = 0; i < currentSize; i++)
+    {
+        if (list[i] == std::to_string(0))
+        {
+            list[i] = std::to_string(7);
+            list.push_back("8");
+        }
+
+        list[i] = std::to_string(std::stoi(list[i]) - 1);
+    }
 }
