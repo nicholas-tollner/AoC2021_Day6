@@ -1,8 +1,7 @@
 set(CMAKE_PREFIX_PATH $ENV{LIB}/functions)
 
 find_path(FUNCTIONS_INCLUDE_DIR strings.h file.h
-        PATH SUFFIXES include
-        PATHS ${CMAKE_PREFIX_PATH})
+        HINTS ${CMAKE_PREFIX_PATH}/include)
 
 find_library(FUNCTIONS_LIBRARY
         NAMES functions
